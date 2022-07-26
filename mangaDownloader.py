@@ -20,7 +20,7 @@ elif locationInput == "4":
 else:
     saveLOC = "Desktop"
 
-# main_URL = 'https://kissmanga.org/manga/manga-ne990713'
+
 print("\nManga URL example: https://kissmanga.org/manga/manga-ne990713\n")
 
 main_URL = input("[+] Enter the manga URL (only kissmanga.org) : ")
@@ -40,28 +40,19 @@ try:
 except:
     mangaName = "manga_downloader"
 
-# print(mangaName) #perfectly working
 
 path_saveDown = os.path.join(os.path.join(os.path.join(
     os.path.expanduser('~')), saveLOC), mangaName)  # Downloading Images Folder
 if not os.path.exists(path_saveDown):
     os.mkdir(path_saveDown)
 
-# chapterListTemp = mainHTML.find("div",{"class":"listing listing8515 full"}).find_all("div")
-chapterListTemp = mainHTML.select(".listing.listing8515.full > div")
 
+chapterListTemp = mainHTML.select(".listing.listing8515.full > div")
 chapterList = []
 
 for i in range(1, len(chapterListTemp)):
-    # temp = chapterListTemp[i].find("a").get_text().split("-")[-1].replace("  ","").replace("\n","").replace("Chapter ","")
-    # if " " in temp:
-    #     temp = temp.split()[0]
-    # if ":" in temp:
-    #     temp = temp.replace(":","")
-    temp = chapterListTemp[i].find(
-        "a").get_text().replace("  ", "").replace("\n", "")
-    chapterList.append({"name": temp, "url": chapter_pre_URL +
-                       ""+chapterListTemp[i].find("a").attrs["href"]})
+    temp = chapterListTemp[i].find("a").get_text().replace("  ", "").replace("\n", "")
+    chapterList.append({"name": temp, "url": chapter_pre_URL +""+chapterListTemp[i].find("a").attrs["href"]})
 
 chapterList.reverse()
 
